@@ -69,10 +69,10 @@ class Database(object):
 
         :param new_extracts: Dictionary containing the img extracts.
         """
-        self.__extract_dict.update(new_extracts)
+        self.get_extract_list().update(new_extracts)
 
         # Checking whether the status of each extract has changed after the dictionary update.
-        for image, labels in self.__extract_dict.items():
+        for image, labels in self.get_extract_list().items():
             if len(labels) > 0:
                 prev_status = "invalid"
                 for label in labels:
@@ -112,7 +112,7 @@ class Database(object):
         :returns found_node: The node object found or None otherwise.
         """
         if not root:
-            root = self.__root_node
+            root = self.get_graph()
 
         found_node = None
         if root.get_name() == name:

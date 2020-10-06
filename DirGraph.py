@@ -27,12 +27,12 @@ class TreeNode(object):
         Arguments:
             child_node: TreeNode object with the new label to be added to the graph stored in the name attribute.
         """
-        child_node.__parent = self
+        child_node.set_parent(self)
         
-        if len(self.__children) > 0:
-            self.__children[-1].__right_sibling = child_node
+        if self.has_children():
+            self.get_children_list()[-1].set_right_sibling(child_node)
 
-        self.__children.append(child_node)
+        self.get_children_list().append(child_node)
 
     def has_children(self):
         """
@@ -63,6 +63,12 @@ class TreeNode(object):
         """  
         return self.__right_sibling
 
+    def set_right_sibling(self, right_sibling):
+        """
+        Sets the right sibling object of the node.
+        """
+        self.__right_sibling = right_sibling
+
     def get_name(self):
         """
         Returns the label stored in the node.
@@ -74,6 +80,12 @@ class TreeNode(object):
         Returns the node parent.
         """
         return self.__parent
+
+    def set_parent(self, parent):
+        """
+        Sets the node parent.
+        """
+        self.__parent = parent
 
     def get_children_list(self):
         """
@@ -88,7 +100,7 @@ class TreeNode(object):
         :returns level: int() storing the node level.
         """
         level = 0
-        p = self.__parent
+        p = self.get_parent()
         while p:
             level += 1
             p = p.get_parent()
@@ -99,8 +111,8 @@ class TreeNode(object):
         Prints the tree graph starting from the self node.
         """
         indents = ' ' * self.get_level() * 3
-        prefix = indents + "|__" if self.__parent else ""
-        print(prefix + self.__name)
-        if self.__children:
-            for child in self.__children:
+        prefix = indents + "|__" if self.get_parent() else ""
+        print(prefix + self.get_name())
+        if self.has_children():
+            for child in self.get_children_list():
                 child.print()
