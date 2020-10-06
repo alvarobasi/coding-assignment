@@ -3,20 +3,28 @@ from DirGraph import TreeNode
 
 class Database(object):
     """
-    docstring
+    The Database object stores the root of a TreeNode object, the image extract dictionary and an extract status dict.
+
+    Arguments:
+        root: name of the root of the TreeNode object.
+
+    Attributes:
+        __root_node: Stores the TreeNode root object.
+        __extract_dict: Dictionary containing the img extracts.
+        __status_dict: Dictionary containing the img extracts status.
     """
 
     def __init__(self, root):
-        """
-        docstring
-        """
         self.__root_node = TreeNode(root)
         self.__extract_dict = dict()
         self.__status_dict = dict()
 
     def add_nodes(self, new_nodes):
         """
-        docstring
+        Adds the nodes contained in «new_nodes» parameter to the Tree and updates de state of all image extarcts that
+        where sotred in the extract dictionary.
+
+        :param new_nodes: List of tuples containing the new nodes.
         """
         for ID, parent in new_nodes:
             self.__add_single_node(ID, parent, self.__root_node)
@@ -56,7 +64,10 @@ class Database(object):
 
     def add_extract(self, new_extracts):
         """
-        docstring
+        Updates the img extract dict with new entries contained in «new_extracts» parameter dict. It also adds the
+        current status of the new extarcts according to the directed graph state.
+
+        :param new_extracts: Dictionary containing the img extracts.
         """
         self.__extract_dict.update(new_extracts)
 
@@ -82,19 +93,23 @@ class Database(object):
 
     def print(self):
         """
-        docstring
+        Prints a graphical representation of the directed graph.
         """
         self.__root_node.print()
 
     def get_graph(self):
         """
-        docstring
+        Returns the root node of the graph, with which it is possible to traverse all of its nodes.
         """
         return self.__root_node
 
     def __get_node(self, name, root=None):
         """
-        docstring
+        Returns a node matching the label «name»
+
+        :param name: str containing the label of the node we are looking for.
+
+        :returns found_node: The node object found or None otherwise.
         """
         if not root:
             root = self.__root_node
@@ -113,7 +128,11 @@ class Database(object):
 
     def __add_single_node(self, ID, parent, root):
         """
-        docstring
+        Adds a single node. Recursive function allowing to traverse the tree with the preordered algorithm.
+
+        :param ID: Label of the new node to be added.
+        :param parent: Parent of the new node to be added.
+        :param root: Root of the subtree to be traversed, as it is a recursive function.
         """
         added = False
         if root.get_name() == parent:
@@ -129,12 +148,12 @@ class Database(object):
 
     def get_extract_status(self):
         """
-        docstring
+        Returns the extract status dictionary.
         """
         return self.__status_dict
 
     def get_extract_list(self):
         """
-        docstring
+        Returns the img extract dictionary.
         """
         return self.__extract_dict
