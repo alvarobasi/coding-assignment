@@ -85,8 +85,7 @@ class TreeNode(object):
         """
         Returns the degree level of the node inside the tree graph.
 
-        Returns:
-            level: int() storing the node level.
+        :returns level: int() storing the node level.
         """
         level = 0
         p = self.__parent
