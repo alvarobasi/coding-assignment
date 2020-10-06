@@ -28,4 +28,5 @@ The result dictionary containing the status of each image extract is printed at 
 ## Credits
 
 https://opendsa-server.cs.vt.edu/ODSA/Books/CS3/html/GenTreeIntro.html
+
 https://www.youtube.com/watch?v=4r_XR9fUPhQ&ab_channel=codebasics
